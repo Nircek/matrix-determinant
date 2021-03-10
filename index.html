@@ -1,0 +1,16 @@
+<button id="less">less</button><button id="more">more</button>
+<table id="table"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+var n=0;
+$('#more').click(()=>{
+    ++n;
+    $('tr').append(`<td><input type="number"></td>`);
+    $('table').append("<tr>"+`<td><input type="number"></td>`.repeat(n)+"</tr>");
+})
+$('#less').click(()=>{
+    --n;
+    $('tr').last().remove();
+    $('tr').each((i,e)=>$(e).children().last().remove());
+})
+</script>
