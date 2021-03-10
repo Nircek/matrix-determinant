@@ -1,16 +1,33 @@
+<button id="calc">Calculate determinant</button><br>
+Determinant: <span id="res"></span><br>
+<br>
+Matrix: <br>
 <button id="less">less</button><button id="more">more</button>
 <table id="table"></div>
+<style>
+input {
+    width: 4em;
+    height: 4em;
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.2.0/math.min.js" integrity="sha512-5ch7MAn3LJHCHL6ri6nmXAyaQRHfmug70F7IwEQ41rnNQSGAMVyZBPTTKlaptPnq/42RXbKb/lTHm+mCQc6lPg==" crossorigin="anonymous"></script>
 <script>
 var n=0;
 $('#more').click(()=>{
     ++n;
-    $('tr').append(`<td><input type="number"></td>`);
-    $('table').append("<tr>"+`<td><input type="number"></td>`.repeat(n)+"</tr>");
-})
+    $('tr').append(`<td><input type="number" value="0"></td>`);
+    $('table').append("<tr>"+`<td><input type="number"  value="0"></td>`.repeat(n)+"</tr>");
+});
+$('#more').click();
 $('#less').click(()=>{
+    if(n>1){
     --n;
     $('tr').last().remove();
     $('tr').each((i,e)=>$(e).children().last().remove());
-})
+    }
+});
+$('#calc').click(()=>{
+    $('#res').text(math.det([...$('tr')].map((e)=>[...$("input", e)].map((f)=>parseInt($(f).val())))));
+});
 </script>
